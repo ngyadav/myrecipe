@@ -1,27 +1,31 @@
 steps:
-  # Step 1: Install dependencies
   - name: 'node:14'
-    entrypoint: 'bash'
-    args: ['-c', 'npm install']
-    dir: '/angularapp'  # Adjust based on your directory structure
- 
-  # Step 2: Build the Angular application
+    args:
+      - '-c'
+      - npm install
+    dir: angularapp
+    entrypoint: bash
   - name: 'node:14'
-    entrypoint: 'bash'
-    args: ['-c', 'npm run build --prod']
-    dir: '/angularapp'
- 
-  # Step 3: Build the Docker image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/cloudcourseb9d41/frontend-images/angular-app:latest', '.']
-    dir: '/angularapp'
- 
-  # Step 4: Push the Docker image to Artifact Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/cloudcourseb9d41/frontend-images/angular-app:latest']
- 
+    args:
+      - '-c'
+      - npm run build --prod
+    dir: angularapp
+    entrypoint: bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '-t'
+      - >-
+        us-central1-docker.pkg.dev/cloudcourseb9d41/frontend-images/angular-app:latest
+      - .
+    dir: angularapp
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - >-
+        us-central1-docker.pkg.dev/cloudcourseb9d41/frontend-images/angular-app:latest
 images:
-- 'us-central1-docker.pkg.dev/cloudcourseb9d41/frontend-images/angular-app:latest'
-
+  - >-
+    us-central1-docker.pkg.dev/cloudcourseb9d41/frontend-images/angular-app:latest
 options:
   logging: CLOUD_LOGGING_ONLY
