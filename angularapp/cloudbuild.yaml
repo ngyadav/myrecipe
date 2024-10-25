@@ -22,3 +22,6 @@ steps:
  
 images:
 - 'us-central1-docker.pkg.dev/cloudcourseb9d41/frontend-images/angular-app:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
