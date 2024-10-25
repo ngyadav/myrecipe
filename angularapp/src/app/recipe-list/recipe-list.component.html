@@ -1,0 +1,46 @@
+<div class="container"> 
+  <h2>Recipe List</h2>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+  <br>
+
+  <!-- Recipe List Table -->
+  <table class="table-container">
+    <thead>
+      <tr>
+          <th (click)="toggleSort()">
+              Title 
+              <span *ngIf="sortDirection === 'asc'" class="sort-icon">↑</span>
+              <span *ngIf="sortDirection === 'desc'" class="sort-icon">↓</span>
+          </th>
+          <th>Ingredients</th>
+          <th>Instructions</th>
+          <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let recipe of recipes">
+        <td class="recipe-title">{{ recipe.title }}</td>
+        <td>
+          <pre>{{ recipe.ingredients }}</pre>
+        </td>
+        <td>
+          <pre>{{ recipe.instructions }}</pre>
+        </td>
+        <td>
+          <!-- Edit button as a link with btn-warning -->
+          <a [href]="'/edit/' + recipe.id" class="button btn-warning">Edit</a> &nbsp;
+          <!-- Delete button with btn-danger class -->
+          <button (click)="deleteRecipe(recipe.id)" class="button btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+
+  <!-- No recipes message -->
+  <p *ngIf="recipes.length === 0">No Recipes available.</p>
+</div>
