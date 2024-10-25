@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe } from '../model/recipe';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
