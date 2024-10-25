@@ -3,18 +3,18 @@ steps:
   - name: 'node:14'
     entrypoint: 'bash'
     args: ['-c', 'npm install']
-    dir: 'angularapp'  # Adjust based on your directory structure
+    dir: '/angularapp'  # Adjust based on your directory structure
  
   # Step 2: Build the Angular application
   - name: 'node:14'
     entrypoint: 'bash'
     args: ['-c', 'npm run build --prod']
-    dir: 'angularapp'
+    dir: '/angularapp'
  
   # Step 3: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'us-central1-docker.pkg.dev/cloudcourseb9d41/frontend-images/angular-app:latest', '.']
-    dir: 'angularapp'
+    dir: '/angularapp'
  
   # Step 4: Push the Docker image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
