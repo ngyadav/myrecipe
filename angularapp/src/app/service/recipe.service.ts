@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class RecipeService {
 
-  private apiUrl = environment.apiUrl;
+  private apiUrl = "https://recipe-backend-520142360909.us-central1.run.app/api/recipes";
  
   constructor(private http:HttpClient) { }
  
